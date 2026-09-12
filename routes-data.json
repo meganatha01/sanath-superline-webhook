@@ -1,0 +1,1318 @@
+{
+  "kandy": {
+    "distanceKm": 115,
+    "durationHours": 3,
+    "roadType": "Normal Road (A1 highway via Kadugannawa)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 350
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 540
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 750
+      }
+    ]
+  },
+  "galle": {
+    "distanceKm": 119,
+    "durationHours": 2,
+    "roadType": "Expressway (Southern Expressway E01)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 360
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 560
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 770
+      }
+    ]
+  },
+  "jaffna": {
+    "distanceKm": 396,
+    "durationHours": 7,
+    "roadType": "Normal Road (A9 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 1190
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1860
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 2570
+      }
+    ]
+  },
+  "kurunegala": {
+    "distanceKm": 94,
+    "durationHours": 2,
+    "roadType": "Normal Road (A6 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 280
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 440
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 610
+      }
+    ]
+  },
+  "anuradhapura": {
+    "distanceKm": 205,
+    "durationHours": 4,
+    "roadType": "Normal Road (A9 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 620
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 960
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1330
+      }
+    ]
+  },
+  "matara": {
+    "distanceKm": 160,
+    "durationHours": 3,
+    "roadType": "Expressway (Southern Expressway E01)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 480
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 750
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1040
+      }
+    ]
+  },
+  "badulla": {
+    "distanceKm": 230,
+    "durationHours": 6,
+    "roadType": "Normal Road (A16 highway via Nuwara Eliya)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 690
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1080
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1500
+      }
+    ]
+  },
+  "trincomalee": {
+    "distanceKm": 257,
+    "durationHours": 5,
+    "roadType": "Normal Road (A6/A12 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 770
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1210
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1670
+      }
+    ]
+  },
+  "negombo": {
+    "distanceKm": 37,
+    "durationHours": 1,
+    "roadType": "Normal Road (Colombo-Negombo Road)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 110
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 170
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 240
+      }
+    ]
+  },
+  "ratnapura": {
+    "distanceKm": 101,
+    "durationHours": 3,
+    "roadType": "Normal Road (A8 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 300
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 470
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 660
+      }
+    ]
+  },
+  "batticaloa": {
+    "distanceKm": 314,
+    "durationHours": 7,
+    "roadType": "Normal Road (A4 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 940
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1480
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 2040
+      }
+    ]
+  },
+  "nuwara eliya": {
+    "distanceKm": 180,
+    "durationHours": 4,
+    "roadType": "Normal Road (A5 via Kandy)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 540
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 850
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1170
+      }
+    ]
+  },
+  "dambulla": {
+    "distanceKm": 148,
+    "durationHours": 3,
+    "roadType": "Normal Road (A6/A9 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 440
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 700
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 960
+      }
+    ]
+  },
+  "kalutara": {
+    "distanceKm": 43,
+    "durationHours": 1,
+    "roadType": "Expressway (Southern Expressway E01)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 130
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 200
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 280
+      }
+    ]
+  },
+  "chilaw": {
+    "distanceKm": 80,
+    "durationHours": 2,
+    "roadType": "Normal Road (A3 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 240
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 380
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 520
+      }
+    ]
+  },
+  "ampara": {
+    "distanceKm": 277,
+    "durationHours": 6,
+    "roadType": "Normal Road (A4 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 830
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1300
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1800
+      }
+    ]
+  },
+  "polonnaruwa": {
+    "distanceKm": 216,
+    "durationHours": 5,
+    "roadType": "Normal Road (A11 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 650
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1020
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1400
+      }
+    ]
+  },
+  "kegalle": {
+    "distanceKm": 78,
+    "durationHours": 2,
+    "roadType": "Normal Road (A1 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 230
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 370
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 510
+      }
+    ]
+  },
+  "monaragala": {
+    "distanceKm": 230,
+    "durationHours": 5,
+    "roadType": "Normal Road (A4 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 690
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1080
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1500
+      }
+    ]
+  },
+  "puttalam": {
+    "distanceKm": 130,
+    "durationHours": 3,
+    "roadType": "Normal Road (A3 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 390
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 610
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 850
+      }
+    ]
+  },
+  "vavuniya": {
+    "distanceKm": 254,
+    "durationHours": 6,
+    "roadType": "Normal Road (A9 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 760
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1190
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1650
+      }
+    ]
+  },
+  "kilinochchi": {
+    "distanceKm": 327,
+    "durationHours": 7,
+    "roadType": "Normal Road (A9 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 980
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1540
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 2130
+      }
+    ]
+  },
+  "mannar": {
+    "distanceKm": 326,
+    "durationHours": 7,
+    "roadType": "Normal Road (A14 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 980
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1530
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 2120
+      }
+    ]
+  },
+  "kalmunai": {
+    "distanceKm": 326,
+    "durationHours": 7,
+    "roadType": "Normal Road (A4 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 980
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1530
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 2120
+      }
+    ]
+  },
+  "panadura": {
+    "distanceKm": 27,
+    "durationHours": 1,
+    "roadType": "Expressway (Southern Expressway E01)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 80
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 130
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 180
+      }
+    ]
+  },
+  "moratuwa": {
+    "distanceKm": 18,
+    "durationHours": 1,
+    "roadType": "Normal Road (Galle Road A2)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 50
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 80
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 120
+      }
+    ]
+  },
+  "ambilipitiya": {
+    "distanceKm": 187,
+    "durationHours": 4,
+    "roadType": "Normal Road (A18 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 560
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 880
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1220
+      }
+    ]
+  },
+  "buttala": {
+    "distanceKm": 245,
+    "durationHours": 5,
+    "roadType": "Normal Road (A18/A2 highway)",
+    "busTypes": [
+      {
+        "type": "Normal",
+        "departureTimes": [
+          "03:30",
+          "06:30",
+          "09:30",
+          "12:30",
+          "15:30",
+          "18:30",
+          "21:30",
+          "00:30"
+        ],
+        "fare": 740
+      },
+      {
+        "type": "Semi-Luxury",
+        "departureTimes": [
+          "04:30",
+          "07:30",
+          "10:30",
+          "13:30",
+          "16:30",
+          "19:30",
+          "22:30"
+        ],
+        "fare": 1150
+      },
+      {
+        "type": "Luxury",
+        "departureTimes": [
+          "05:30",
+          "08:30",
+          "11:30",
+          "14:30",
+          "17:30",
+          "20:30",
+          "23:30"
+        ],
+        "fare": 1590
+      }
+    ]
+  }
+}
