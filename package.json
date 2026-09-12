@@ -1,0 +1,8 @@
+{
+  "name": "sanath-superline-webhook",
+  "version": "1.0.0",
+  "description": "Dialogflow ES webhook fulfillment for Sanath Superline bus chatbot, deployed on Vercel",
+  "dependencies": {
+    "dialogflow-fulfillment": "^0.6.1"
+  }
+}
