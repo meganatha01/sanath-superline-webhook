@@ -217,11 +217,6 @@ module.exports = (req, res) => {
   intentMap.set('busType.enquiry', busTypeEnquiry);
   intentMap.set('roadType.enquiry', roadTypeEnquiry);
   intentMap.set('fare.enquiry', fareEnquiry);
-  // Follow-up intents: same handlers, just triggered by context-only phrasing
-  intentMap.set('timetable.followup', timetableEnquiry);
-  intentMap.set('busType.followup', busTypeEnquiry);
-  intentMap.set('roadType.followup', roadTypeEnquiry);
-  intentMap.set('fare.followup', fareEnquiry);
   intentMap.set('Default Fallback Intent', fallback);
 
   agent.handleRequest(intentMap);
