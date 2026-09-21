@@ -210,15 +210,12 @@ function originProvided(agent) {
   rememberCity(agent, destination, origin);
 }
 
-// Ends the conversation warmly and wipes all memory so the next
-// enquiry starts fresh. Wired to smalltalk.thanks in intentMap.
+// Wipes memory contexts so the next enquiry starts fresh. The
+// actual "you're welcome" text is set in the Dialogflow console
+// on smalltalk.thanks - the webhook's only job here is the memory
+// side effect. We do NOT call agent.add(), so Dialogflow's
+// configured responses are what the passenger sees.
 function thanks(agent) {
-  const responses = [
-    `You're welcome! Safe travels, and ask anytime.`,
-    `Anytime! Have a great journey. I'm here if you need me again.`,
-    `Happy to help! Safe travels, and feel free to ask again anytime.`,
-  ];
-  agent.add(responses[Math.floor(Math.random() * responses.length)]);
   clearMemory(agent);
 }
 
