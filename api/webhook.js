@@ -8,6 +8,12 @@ const routesData = require('../routes-data.json');
 const CONTEXT_NAME = 'city-context';
 const CONTEXT_LIFESPAN = 5;
 
+// Used when someone wants to go TO Colombo but hasn't said where they
+// currently are. We ask "where are you now?" and park the original
+// request here until the next message supplies an origin city.
+const AWAITING_ORIGIN_CONTEXT = 'awaiting-origin';
+const AWAITING_ORIGIN_LIFESPAN = 2;
+
 function getCityData(cityParam) {
   if (!cityParam) return null;
   const key = String(cityParam).toLowerCase().trim();
@@ -74,9 +80,98 @@ function rememberCity(agent, destination, origin) {
   });
 }
 
+// True when the destination is Colombo and no real origin was ever given -
+// resolveOrigin() silently defaults missing origin to 'Colombo' too, which
+// otherwise produces a confusing "don't have info for Colombo" reply for a
+// city we obviously know. This is the case where we should ask a
+// clarifying question instead of failing.
+function isSelfReferentialColombo(destination, origin) {
+  const destKey = String(destination || '').toLowerCase().trim();
+  const originKey = String(origin || '').toLowerCase().trim();
+  return destKey === 'colombo' && originKey === 'colombo';
+}
+
+// Ask "where are you now?" and remember what the person actually wanted
+// (route / timetable / fare / busType / roadType, plus any busType they
+// already named) so origin.provided() can give the right kind of answer
+// once they reply with a city.
+function askForOrigin(agent, pendingIntent, busType) {
+  agent.add(`Colombo is our main hub! Where are you travelling from?`);
+
+  agent.context.set({
+    name: AWAITING_ORIGIN_CONTEXT,
+    lifespan: AWAITING_ORIGIN_LIFESPAN,
+    parameters: { pendingIntent, pendingBusType: busType || '' },
+  });
+
+  // Remember that Colombo is the destination so city-context stays useful
+  // even though we don't have the origin yet.
+  agent.context.set({
+    name: CONTEXT_NAME,
+    lifespan: CONTEXT_LIFESPAN,
+    parameters: { destination: 'Colombo', origin: '' },
+  });
+}
+
+// Handles the reply to "where are you now?" - builds a full answer
+// (distance, journey time, road type, bus types and fares) tailored to
+// whichever enquiry the person originally made.
+function originProvided(agent) {
+  const ctx = agent.context.get(AWAITING_ORIGIN_CONTEXT);
+  const pendingIntent = (ctx && ctx.parameters && ctx.parameters.pendingIntent) || 'route';
+  const pendingBusType = (ctx && ctx.parameters && ctx.parameters.pendingBusType) || agent.parameters.busType;
+
+  const origin = agent.parameters.origin || agent.parameters['city-context.origin'] || agent.parameters.city;
+  const destination = 'Colombo';
+  const result = getRouteData(destination, origin);
+
+  if (!origin || !result) {
+    agent.add(`Sorry, I don't recognise that city. Could you tell me which city you're travelling from?`);
+    return;
+  }
+  const { data } = result;
+
+  // Always lead with the basics, then add detail matching what was asked.
+  agent.add(`Got it! Here's Colombo travel info from ${origin}:`);
+  agent.add(`Distance: ${data.distanceKm} km  |  Journey time: ~${data.durationHours} hrs  |  Road: ${data.roadType}`);
+
+  if (pendingIntent === 'timetable') {
+    data.busTypes.forEach(bus => {
+      agent.add(`${bus.type}: ${bus.departureTimes.join(', ')}`);
+    });
+  } else if (pendingIntent === 'fare' || pendingIntent === 'busType') {
+    if (pendingBusType) {
+      const match = data.busTypes.find(
+        b => b.type.toLowerCase() === String(pendingBusType).toLowerCase()
+      );
+      if (match) {
+        agent.add(`${match.type}: departs ${match.departureTimes.join(', ')} - Rs. ${match.fare}`);
+      }
+    } else {
+      data.busTypes.forEach(bus => {
+        agent.add(`${bus.type} - departs ${bus.departureTimes.join(', ')} - Rs. ${bus.fare}`);
+      });
+    }
+  } else if (pendingIntent === 'roadType') {
+    // Road type already included above; nothing extra to add.
+  } else {
+    // route (default): give the general overview, same as routeEnquiry.
+    agent.add(`Bus types available: ${data.busTypes.map(b => b.type).join(', ')}`);
+    agent.add(`Would you like the timetable or fares?`);
+  }
+
+  rememberCity(agent, destination, origin);
+}
+
 function routeEnquiry(agent) {
   const destination = resolveDestination(agent);
   const origin = resolveOrigin(agent);
+
+  if (isSelfReferentialColombo(destination, origin)) {
+    askForOrigin(agent, 'route');
+    return;
+  }
+
   const result = getRouteData(destination, origin);
 
   if (!result) {
@@ -97,6 +192,12 @@ function routeEnquiry(agent) {
 function timetableEnquiry(agent) {
   const destination = resolveDestination(agent);
   const origin = resolveOrigin(agent);
+
+  if (isSelfReferentialColombo(destination, origin)) {
+    askForOrigin(agent, 'timetable');
+    return;
+  }
+
   const result = getRouteData(destination, origin);
 
   if (!result) {
@@ -118,6 +219,12 @@ function busTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
   const origin = resolveOrigin(agent);
   const busType = agent.parameters.busType;
+
+  if (isSelfReferentialColombo(destination, origin)) {
+    askForOrigin(agent, 'busType', busType);
+    return;
+  }
+
   const result = getRouteData(destination, origin);
 
   if (!result) {
@@ -152,6 +259,12 @@ function busTypeEnquiry(agent) {
 function roadTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
   const origin = resolveOrigin(agent);
+
+  if (isSelfReferentialColombo(destination, origin)) {
+    askForOrigin(agent, 'roadType');
+    return;
+  }
+
   const result = getRouteData(destination, origin);
 
   if (!result) {
@@ -168,6 +281,12 @@ function fareEnquiry(agent) {
   const destination = resolveDestination(agent);
   const origin = resolveOrigin(agent);
   const busType = agent.parameters.busType;
+
+  if (isSelfReferentialColombo(destination, origin)) {
+    askForOrigin(agent, 'fare', busType);
+    return;
+  }
+
   const result = getRouteData(destination, origin);
 
   if (!result) {
@@ -217,6 +336,7 @@ module.exports = (req, res) => {
   intentMap.set('busType.enquiry', busTypeEnquiry);
   intentMap.set('roadType.enquiry', roadTypeEnquiry);
   intentMap.set('fare.enquiry', fareEnquiry);
+  intentMap.set('origin.provided', originProvided);
   intentMap.set('Default Fallback Intent', fallback);
 
   agent.handleRequest(intentMap);
