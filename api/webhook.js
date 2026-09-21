@@ -214,9 +214,9 @@ function originProvided(agent) {
 // enquiry starts fresh. Wired to smalltalk.thanks in intentMap.
 function thanks(agent) {
   const responses = [
-    `You're welcome! Safe travels 🚌 — ask anytime.`,
-    `Anytime! Have a great journey 🚌 — I'm here if you need me again.`,
-    `Happy to help! Safe travels 🚌 — feel free to ask again anytime.`,
+    `You're welcome! Safe travels, and ask anytime.`,
+    `Anytime! Have a great journey. I'm here if you need me again.`,
+    `Happy to help! Safe travels, and feel free to ask again anytime.`,
   ];
   agent.add(responses[Math.floor(Math.random() * responses.length)]);
   clearMemory(agent);
@@ -242,7 +242,7 @@ function routeEnquiry(agent) {
   const { data } = result;
 
   if (isPivot) {
-    agent.add(`Sure, switching to ${destination} — here are the details.`);
+    agent.add(`Sure, switching to ${destination}. Here are the details.`);
   }
   agent.add(`Yes! Sanath Superline runs buses from ${origin} to ${destination}.`);
   agent.add(`Distance: ${data.distanceKm} km  |  Journey time: ~${data.durationHours} hrs  |  Road: ${data.roadType}`);
