@@ -58,16 +58,37 @@ function resolveDestination(agent) {
   return destination;
 }
 
-// Same idea for origin, defaulting to Colombo if nothing was ever given.
-function resolveOrigin(agent) {
-  let origin = agent.parameters.origin;
-  if (!origin) {
-    const ctx = agent.context.get(CONTEXT_NAME);
-    if (ctx && ctx.parameters && ctx.parameters.origin) {
-      origin = ctx.parameters.origin;
-    }
+// Reads origin from the current utterance's parameters, or from the
+// remembered context if the user is continuing the same trip.
+//
+// IMPORTANT (Choice A fix): if the person has just named a brand-new
+// destination this turn (e.g. "I want to go matara" after an earlier
+// conversation about Jaffna->Colombo), any leftover origin from that
+// earlier trip should NOT carry over. Otherwise we'd label Colombo's
+// Matara data as "from Jaffna to Matara", which is misleading - the
+// distance/fare stored in routes-data.json is the Colombo<->Matara leg,
+// not the true Jaffna<->Matara leg. So when the destination changes,
+// we reset origin back to Colombo (the hub) unless the user explicitly
+// named a new origin in the same sentence.
+function resolveOrigin(agent, resolvedDestination) {
+  const explicitOrigin = agent.parameters.origin;
+  if (explicitOrigin) return explicitOrigin;
+
+  const ctx = agent.context.get(CONTEXT_NAME);
+  const previousDestination = ctx && ctx.parameters && ctx.parameters.destination;
+  const rememberedOrigin = ctx && ctx.parameters && ctx.parameters.origin;
+
+  const destinationChanged =
+    previousDestination &&
+    resolvedDestination &&
+    String(previousDestination).toLowerCase().trim() !==
+      String(resolvedDestination).toLowerCase().trim();
+
+  if (destinationChanged) {
+    return 'Colombo';
   }
-  return origin || 'Colombo';
+
+  return rememberedOrigin || 'Colombo';
 }
 
 // Call this at the end of every enquiry handler so the city is
@@ -165,7 +186,7 @@ function originProvided(agent) {
 
 function routeEnquiry(agent) {
   const destination = resolveDestination(agent);
-  const origin = resolveOrigin(agent);
+  const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
     askForOrigin(agent, 'route');
@@ -191,7 +212,7 @@ function routeEnquiry(agent) {
 
 function timetableEnquiry(agent) {
   const destination = resolveDestination(agent);
-  const origin = resolveOrigin(agent);
+  const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
     askForOrigin(agent, 'timetable');
@@ -217,7 +238,7 @@ function timetableEnquiry(agent) {
 
 function busTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
-  const origin = resolveOrigin(agent);
+  const origin = resolveOrigin(agent, destination);
   const busType = agent.parameters.busType;
 
   if (isSelfReferentialColombo(destination, origin)) {
@@ -258,7 +279,7 @@ function busTypeEnquiry(agent) {
 
 function roadTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
-  const origin = resolveOrigin(agent);
+  const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
     askForOrigin(agent, 'roadType');
@@ -279,7 +300,7 @@ function roadTypeEnquiry(agent) {
 
 function fareEnquiry(agent) {
   const destination = resolveDestination(agent);
-  const origin = resolveOrigin(agent);
+  const origin = resolveOrigin(agent, destination);
   const busType = agent.parameters.busType;
 
   if (isSelfReferentialColombo(destination, origin)) {
