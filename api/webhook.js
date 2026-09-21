@@ -14,6 +14,11 @@ const CONTEXT_LIFESPAN = 5;
 const AWAITING_ORIGIN_CONTEXT = 'awaiting-origin';
 const AWAITING_ORIGIN_LIFESPAN = 2;
 
+// Every context this webhook creates. When a conversation ends (a
+// "thanks" / "bye" signal) we clear all of these so the next
+// enquiry starts fresh with no stale origin / destination bleeding in.
+const ALL_CONTEXTS = [CONTEXT_NAME, AWAITING_ORIGIN_CONTEXT];
+
 function getCityData(cityParam) {
   if (!cityParam) return null;
   const key = String(cityParam).toLowerCase().trim();
@@ -61,34 +66,55 @@ function resolveDestination(agent) {
 // Reads origin from the current utterance's parameters, or from the
 // remembered context if the user is continuing the same trip.
 //
-// IMPORTANT (Choice A fix): if the person has just named a brand-new
-// destination this turn (e.g. "I want to go matara" after an earlier
-// conversation about Jaffna->Colombo), any leftover origin from that
-// earlier trip should NOT carry over. Otherwise we'd label Colombo's
-// Matara data as "from Jaffna to Matara", which is misleading - the
-// distance/fare stored in routes-data.json is the Colombo<->Matara leg,
-// not the true Jaffna<->Matara leg. So when the destination changes,
-// we reset origin back to Colombo (the hub) unless the user explicitly
-// named a new origin in the same sentence.
+// Tricky detail: the `origin` parameter has a Default Value of
+// `#city-context.origin` in Dialogflow, so `agent.parameters.origin`
+// is silently pre-filled with the remembered origin even when the
+// user didn't actually say it in this utterance. We can't just trust
+// the param at face value - instead we check whether the origin word
+// appears in the raw query text. If it does, the user really said it.
+// If not, it was auto-filled from context and we treat it as potentially
+// stale (see detectDestinationPivot).
 function resolveOrigin(agent, resolvedDestination) {
-  const explicitOrigin = agent.parameters.origin;
-  if (explicitOrigin) return explicitOrigin;
+  const paramOrigin = agent.parameters.origin;
+  const queryText = String(agent.query || '').toLowerCase();
+  const userActuallyTypedOrigin =
+    paramOrigin && queryText.includes(String(paramOrigin).toLowerCase());
 
-  const ctx = agent.context.get(CONTEXT_NAME);
-  const previousDestination = ctx && ctx.parameters && ctx.parameters.destination;
-  const rememberedOrigin = ctx && ctx.parameters && ctx.parameters.origin;
+  if (userActuallyTypedOrigin) {
+    return paramOrigin;
+  }
 
-  const destinationChanged =
-    previousDestination &&
-    resolvedDestination &&
-    String(previousDestination).toLowerCase().trim() !==
-      String(resolvedDestination).toLowerCase().trim();
-
-  if (destinationChanged) {
+  // Fresh new destination + no explicit origin typed = passenger has
+  // pivoted to a new trip, so drop any stale origin and default to Colombo.
+  if (detectDestinationPivot(agent, resolvedDestination)) {
     return 'Colombo';
   }
 
-  return rememberedOrigin || 'Colombo';
+  const ctx = agent.context.get(CONTEXT_NAME);
+  const rememberedOrigin = ctx && ctx.parameters && ctx.parameters.origin;
+  return paramOrigin || rememberedOrigin || 'Colombo';
+}
+
+// True when the user has just named a brand-new destination different
+// from the one we last remembered (a "pivot"). Returns false when it's
+// the same destination (a follow-up on the same trip) or when there
+// was no previous destination.
+function detectDestinationPivot(agent, resolvedDestination) {
+  const ctx = agent.context.get(CONTEXT_NAME);
+  const previousDestination = ctx && ctx.parameters && ctx.parameters.destination;
+  if (!previousDestination || !resolvedDestination) return false;
+  return (
+    String(previousDestination).toLowerCase().trim() !==
+    String(resolvedDestination).toLowerCase().trim()
+  );
+}
+
+// Wipes every context this webhook manages. Called at the end of a
+// conversation (thanks / bye) so the next enquiry starts clean.
+function clearMemory(agent) {
+  ALL_CONTEXTS.forEach(name => {
+    agent.context.set({ name, lifespan: 0 });
+  });
 }
 
 // Call this at the end of every enquiry handler so the city is
@@ -184,8 +210,21 @@ function originProvided(agent) {
   rememberCity(agent, destination, origin);
 }
 
+// Ends the conversation warmly and wipes all memory so the next
+// enquiry starts fresh. Wired to smalltalk.thanks in intentMap.
+function thanks(agent) {
+  const responses = [
+    `You're welcome! Safe travels 🚌 — ask anytime.`,
+    `Anytime! Have a great journey 🚌 — I'm here if you need me again.`,
+    `Happy to help! Safe travels 🚌 — feel free to ask again anytime.`,
+  ];
+  agent.add(responses[Math.floor(Math.random() * responses.length)]);
+  clearMemory(agent);
+}
+
 function routeEnquiry(agent) {
   const destination = resolveDestination(agent);
+  const isPivot = detectDestinationPivot(agent, destination);
   const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
@@ -202,6 +241,9 @@ function routeEnquiry(agent) {
   }
   const { data } = result;
 
+  if (isPivot) {
+    agent.add(`Sure, switching to ${destination} — here are the details.`);
+  }
   agent.add(`Yes! Sanath Superline runs buses from ${origin} to ${destination}.`);
   agent.add(`Distance: ${data.distanceKm} km  |  Journey time: ~${data.durationHours} hrs  |  Road: ${data.roadType}`);
   agent.add(`Bus types available: ${data.busTypes.map(b => b.type).join(', ')}`);
@@ -212,6 +254,7 @@ function routeEnquiry(agent) {
 
 function timetableEnquiry(agent) {
   const destination = resolveDestination(agent);
+  const isPivot = detectDestinationPivot(agent, destination);
   const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
@@ -228,6 +271,9 @@ function timetableEnquiry(agent) {
   }
   const { data } = result;
 
+  if (isPivot) {
+    agent.add(`Sure, switching to ${destination}.`);
+  }
   agent.add(`Here's the timetable from ${origin} to ${destination}:`);
   data.busTypes.forEach(bus => {
     agent.add(`${bus.type}: ${bus.departureTimes.join(', ')}`);
@@ -238,6 +284,7 @@ function timetableEnquiry(agent) {
 
 function busTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
+  const isPivot = detectDestinationPivot(agent, destination);
   const origin = resolveOrigin(agent, destination);
   const busType = agent.parameters.busType;
 
@@ -255,6 +302,9 @@ function busTypeEnquiry(agent) {
   }
   const { data } = result;
 
+  if (isPivot) {
+    agent.add(`Sure, switching to ${destination}.`);
+  }
   if (busType) {
     const match = data.busTypes.find(
       b => b.type.toLowerCase() === String(busType).toLowerCase()
@@ -279,6 +329,7 @@ function busTypeEnquiry(agent) {
 
 function roadTypeEnquiry(agent) {
   const destination = resolveDestination(agent);
+  const isPivot = detectDestinationPivot(agent, destination);
   const origin = resolveOrigin(agent, destination);
 
   if (isSelfReferentialColombo(destination, origin)) {
@@ -293,6 +344,9 @@ function roadTypeEnquiry(agent) {
     agent.add(`We cover: ${listKnownCities()}.`);
     return;
   }
+  if (isPivot) {
+    agent.add(`Sure, switching to ${destination}.`);
+  }
   agent.add(`Buses to ${destination} travel via: ${result.data.roadType}.`);
 
   rememberCity(agent, destination, origin);
@@ -300,6 +354,7 @@ function roadTypeEnquiry(agent) {
 
 function fareEnquiry(agent) {
   const destination = resolveDestination(agent);
+  const isPivot = detectDestinationPivot(agent, destination);
   const origin = resolveOrigin(agent, destination);
   const busType = agent.parameters.busType;
 
@@ -317,6 +372,9 @@ function fareEnquiry(agent) {
   }
   const { data } = result;
 
+  if (isPivot) {
+    agent.add(`Sure, switching to ${destination}.`);
+  }
   if (busType) {
     const match = data.busTypes.find(
       b => b.type.toLowerCase() === String(busType).toLowerCase()
@@ -358,6 +416,7 @@ module.exports = (req, res) => {
   intentMap.set('roadType.enquiry', roadTypeEnquiry);
   intentMap.set('fare.enquiry', fareEnquiry);
   intentMap.set('origin.provided', originProvided);
+  intentMap.set('smalltalk.thanks', thanks);
   intentMap.set('Default Fallback Intent', fallback);
 
   agent.handleRequest(intentMap);
